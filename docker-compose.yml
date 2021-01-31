@@ -26,8 +26,8 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - static_volume:/home/app/site/web/static
-      - media_volume:/home/app/site/media
+      - static_volume:/home/site/web/static
+      - media_volume:/home/site/media
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.groot.entrypoints=http"
