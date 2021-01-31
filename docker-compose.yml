@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     command: gunicorn main:app -b 0.0.0.0:8000
     volumes:
-      - static_volume:/home/app/site/web/static
-      - media_volume:/home/app/site/media
+      - static_volume:/home/site/web/static
+      - media_volume:/home/site/media
     expose:
       - 8000
     depends_on:
