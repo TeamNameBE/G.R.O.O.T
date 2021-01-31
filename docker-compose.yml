@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     command: gunicorn main:app -b 0.0.0.0:8000
     volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
+      - static_volume:/home/app/site/web/static
+      - media_volume:/home/app/site/media
     expose:
       - 8000
     depends_on:
@@ -26,19 +26,19 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
+      - static_volume:/home/app/site/web/static
+      - media_volume:/home/app/site/media
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web_chifuri.entrypoints=http"
-      - "traefik.http.routers.web_chifuri.rule=Host(`groot.ninja`)"
-      - "traefik.http.middlewares.web_chifuri-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.web_chifuri.middlewares=web_chifuri-https-redirect"
-      - "traefik.http.routers.web_chifuri-secure.entrypoints=https"
-      - "traefik.http.routers.web_chifuri-secure.rule=Host(`groot.ninja`)"
-      - "traefik.http.routers.web_chifuri-secure.tls=true"
-      - "traefik.http.routers.web_chifuri-secure.tls.certresolver=http"
-      - "traefik.http.routers.web_chifuri-secure.service=nginx-groot@docker"
+      - "traefik.http.routers.groot.entrypoints=http"
+      - "traefik.http.routers.groot.rule=Host(`groot.ninja`)"
+      - "traefik.http.middlewares.groot-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.groot.middlewares=groot-https-redirect"
+      - "traefik.http.routers.groot-secure.entrypoints=https"
+      - "traefik.http.routers.groot-secure.rule=Host(`groot.ninja`)"
+      - "traefik.http.routers.groot-secure.tls=true"
+      - "traefik.http.routers.groot-secure.tls.certresolver=http"
+      - "traefik.http.routers.groot-secure.service=nginx-groot@docker"
       - "traefik.docker.network=traefik-proxy"
     depends_on:
       - web
