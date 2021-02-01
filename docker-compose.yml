@@ -3,8 +3,7 @@ version: '3.7'
 services:
   web:
     build:
-      context: ./web/
-      dockerfile: Dockerfile
+      context: ./web
     command: gunicorn main:app -b 0.0.0.0:8000
     volumes:
       - static_volume:/home/site/web/static
@@ -46,6 +45,16 @@ services:
       - private
       - public
       - traefik-proxy
+
+  groot:
+    build:
+      context: ./groot
+    command: python3 main.py
+    depends_on:
+      - redis
+      - web
+    networks:
+      - private
 
 networks:
   private:
