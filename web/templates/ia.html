@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - G.R.O.O.T</title>
-    <link rel="stylesheet" {{ url_for('static', filename='css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/Drag--Drop-Upload-Form.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Drag--Drop-Upload-Form.css') }}">
 </head>
 
 <body id="page-top" style="border-color: var(--danger);">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-size: 35px;font-family: Alatsi, sans-serif;color: var(--warning);">G.R.O.O.T</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="/" style="font-size: 35px;font-family: Alatsi, sans-serif;color: var(--warning);">G.R.O.O.T</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#download">Essayez le maintenant</a></li>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </nav>
-    <header class="masthead" style="background: url(&quot;assets/img/4362%20[Converti].svg&quot;) repeat, linear-gradient(145deg, #479f02 0%, #a96946 100%);height: 100%;background-size: auto, auto;">
+    <header class="masthead" style="background: url('{{ url_for('static', filename='img/bg-plants.svg') }}') repeat, linear-gradient(145deg, #479f02 0%, #a96946 100%);height: 100%;background-size: auto, auto;">
         <div class="container h-100">
             <div class="row row-cols-1 h-100">
                 <div class="col my-auto">
