@@ -1,5 +1,5 @@
 # G.R.O.O.T.
-Grande reconnaissance d'Orchidées, d'Oseille et de Te-plan
+Grande reconnaissance d'Orchidées, d'Ortilles et de Te-plan
 
 
 Le projet est separe en deux parties, un site web, et une intelligence artificielle. Les deux communiauent ensemble en suivant le schema suivant :
