@@ -1,3 +1,6 @@
 ve*
 .vscode
 .env
+__pycache__
+digit.model
+MNIST_data
