@@ -2,13 +2,10 @@
 # BUILDER #
 ###########
 
-# pull official base image
-FROM python:3.8.3-alpine as builder
+FROM python:3.8.7-alpine as builder
 
-# set work directory
 WORKDIR /usr/src/app
 
-# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
@@ -19,8 +16,9 @@ COPY . .
 RUN flake8 --ignore=E501,F401 .
 
 # install dependencies
+RUN apk update && apk add build-base
 COPY ./requirements.txt .
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
+RUN pip install --upgrade pip && pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 
 #########
@@ -28,7 +26,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 #########
 
 # pull official base image
-FROM python:3.8.3-alpine
+FROM python:3.8.7-alpine
 
 RUN mkdir -p /home/groot
 RUN addgroup -S groot && adduser -S groot -G groot
