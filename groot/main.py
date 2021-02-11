@@ -2,11 +2,11 @@ import tensorflow as tf
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
-import redis
+# import redis
 
 
 def main(argv):
-    database = redis.Redis(host='localhost', port=6379, db=0)
+    # database = redis.Redis(host='localhost', port=6379, db=0)
     model_name = argv[0]
 
     model = tf.keras.models.load_model(model_name)
