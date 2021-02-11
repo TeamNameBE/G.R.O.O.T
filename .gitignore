@@ -4,3 +4,4 @@ ve*
 __pycache__
 digit.model
 MNIST_data
+*.png
