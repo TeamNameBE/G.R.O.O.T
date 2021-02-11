@@ -3,6 +3,7 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
 mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -18,7 +19,7 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=500)
+model.fit(x_train, y_train, epochs=30)
 
 loss, accuracy = model.evaluate(x_test, y_test)
 
@@ -26,11 +27,13 @@ print(accuracy)
 print(loss)
 
 model.save("digit.model")
-# model = tf.keras.models.load_model("digit.model")
+"""
+model = tf.keras.models.load_model("digit.model")
 
 filename = input("enter filename of picture ")
 while filename != "quit":
     img = cv.imread(filename)[:, :, 0]
+    img = cv.resize(img, (28, 28))
     img = np.invert(np.array([img]))
     prediction = model.predict(img)
     print(np.argmax(prediction))
