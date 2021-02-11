@@ -42,7 +42,7 @@ ENV APP_HOME=/home/groot/app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-RUN apt update && apt install -y python3-pip
+RUN apt update && apt install -y python3-pip libgl
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip3 install --upgrade pip
