@@ -47,7 +47,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update -y && apt install -y apt-utils python3-pip libgl-dev libglib2.0-0
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
-RUN pip3 install --upgrade pip3
 RUN pip3 install --no-cache /wheels/*
 
 # copy project
