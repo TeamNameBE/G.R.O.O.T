@@ -42,6 +42,8 @@ ENV APP_HOME=/home/groot/app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
+ENV TZ=Europe/Brussels
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update -y && apt install -y apt-utils python3-pip libgl-dev libglib2.0-0
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
