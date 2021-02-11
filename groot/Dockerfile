@@ -2,34 +2,39 @@
 # BUILDER #
 ###########
 
-FROM python:3.8.7-alpine as builder
+FROM ubuntu as builder
 
 WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apt update \
+    && apt install -y gcc python3-dev musl-dev python3-pip\
+    && apt install -y libffi-dev
+    
 # lint
-RUN pip install --upgrade pip
-RUN pip install flake8
+RUN pip3 install --upgrade pip
+RUN pip3 install flake8
 COPY . .
 RUN flake8 --ignore=E501,F401 .
 
-# install dependencies
-RUN apk update && apk add build-base
 COPY ./requirements.txt .
-RUN pip install --upgrade pip && pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
-
+RUN pip3 install --upgrade pip \
+    && pip3 install --upgrade setuptools \
+    && pip3 wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 #########
 # FINAL #
 #########
 
 # pull official base image
-FROM python:3.8.7-alpine
+FROM ubuntu
 
+# create directory for the groot user
 RUN mkdir -p /home/groot
-RUN addgroup -S groot && adduser -S groot -G groot
+RUN adduser groot
+RUN usermod -aG groot groot
 
 # create the appropriate directories
 ENV HOME=/home/groot
@@ -37,11 +42,11 @@ ENV APP_HOME=/home/groot/app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-# install dependencies
-RUN apk update && apk add libpq
+RUN apt update && apt install -y python3-pip
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
-RUN pip install --no-cache /wheels/*
+RUN pip3 install --upgrade pip
+RUN pip3 install --no-cache /wheels/*
 
 # copy project
 COPY . $APP_HOME
