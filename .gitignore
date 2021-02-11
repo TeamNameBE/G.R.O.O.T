@@ -5,3 +5,6 @@ __pycache__
 digit.model
 MNIST_data
 *.png
+media/*.jpg
+media/*.jpeg
+media/*.png
