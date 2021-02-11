@@ -4,7 +4,7 @@ import secrets
 import redis
 from flask import Flask, flash, redirect, render_template, request, url_for
 
-from settings import UPLOAD_FOLDER, EXTENSIONS_VALUES
+from settings import UPLOAD_FOLDER
 from utils import allowed_file, get_extension
 
 app = Flask(__name__)
