@@ -33,7 +33,7 @@ def ia_home():
         return redirect(request.url)
 
     if allowed_file(file.filename):
-        database = redis.Redis(host="localhost", port=6379, db=0)
+        database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
 
         ext = get_extension(file.filename)
         filename = secrets.token_hex(6)
