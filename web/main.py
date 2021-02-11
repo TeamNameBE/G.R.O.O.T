@@ -4,7 +4,7 @@ import secrets
 import redis
 from flask import Flask, flash, redirect, render_template, request, url_for
 
-from settings import UPLOAD_FOLDER
+from settings import UPLOAD_FOLDER, REDIS_HOST
 from utils import allowed_file, get_extension
 
 app = Flask(__name__)
@@ -61,7 +61,7 @@ def results_view():
 
 @app.route('/display/<filename>')
 def display_image(filename):
-    database = redis.Redis(host="localhost", port=6379, db=0)
+    database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
     filename_full = database.get(filename)
     if filename_full is None:
         return redirect(url_for('static', filename='img/404.gif'), code=301)
