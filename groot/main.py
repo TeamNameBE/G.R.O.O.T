@@ -5,8 +5,12 @@ import matplotlib.pyplot as plt
 import sys
 
 def main(argv):
+    if len(argv) == 0:
+        print("You must speciifie number of train or a model to load")
     
-    if len(argv) == 0: # phase de train on va recréer un model 
+    if argv[0].isdigit(): # phase de train on va recréer un model 
+
+        nb_train = int(argv[0])
 
         mnist = tf.keras.datasets.mnist
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -23,7 +27,7 @@ def main(argv):
 
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-        model.fit(x_train, y_train, epochs=30)
+        model.fit(x_train, y_train, epochs=nb_train)
 
         loss, accuracy = model.evaluate(x_test, y_test)
 
@@ -34,7 +38,9 @@ def main(argv):
     
     else: # phase de test on load un model 
 
-        model = tf.keras.models.load_model("digit.model")
+        model_name = argv[0] 
+
+        model = tf.keras.models.load_model(model_name)
 
         filename = input("enter filename of picture ")
         while filename != "quit":
