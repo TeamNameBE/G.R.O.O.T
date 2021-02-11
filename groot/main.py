@@ -9,7 +9,7 @@ def main(argv):
     if len(argv) == 0:
         print("You must speciifie number of train or a model to load")
 
-    if argv[0].isdigit(): # phase de train on va recréer un model
+    if argv[0].isdigit():  # phase de train on va recréer un model
 
         nb_train = int(argv[0])
 
