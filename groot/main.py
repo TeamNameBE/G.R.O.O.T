@@ -2,41 +2,50 @@ import tensorflow as tf
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
-"""
-mnist = tf.keras.datasets.mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+def main(argv):
+    
+    if len(argv) == 0: # phase de train on va recréer un model 
 
-x_train = tf.keras.utils.normalize(x_train, axis=1)
-x_test = tf.keras.utils.normalize(x_test, axis=1)
+        mnist = tf.keras.datasets.mnist
+        (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
-model.add(tf.keras.layers.Dense(units=512, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(units=258, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(units=126, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+        x_train = tf.keras.utils.normalize(x_train, axis=1)
+        x_test = tf.keras.utils.normalize(x_test, axis=1)
 
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        model = tf.keras.models.Sequential()
+        model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
+        model.add(tf.keras.layers.Dense(units=512, activation=tf.nn.relu))
+        model.add(tf.keras.layers.Dense(units=258, activation=tf.nn.relu))
+        model.add(tf.keras.layers.Dense(units=126, activation=tf.nn.relu))
+        model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
-model.fit(x_train, y_train, epochs=30)
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-loss, accuracy = model.evaluate(x_test, y_test)
+        model.fit(x_train, y_train, epochs=30)
 
-print(accuracy)
-print(loss)
+        loss, accuracy = model.evaluate(x_test, y_test)
 
-model.save("digit.model")
-"""
-model = tf.keras.models.load_model("digit.model")
+        print(accuracy)
+        print(loss)
 
-filename = input("enter filename of picture ")
-while filename != "quit":
-    img = cv.imread(filename)[:, :, 0]
-    img = cv.resize(img, (28, 28))
-    img = np.invert(np.array([img]))
-    prediction = model.predict(img)
-    print(np.argmax(prediction))
-    plt.imshow(img[0], cmap=plt.cm.binary)
-    plt.show()
-    filename = input("enter filename of picture ")
+        model.save("digit.model")
+    
+    else: # phase de test on load un model 
+
+        model = tf.keras.models.load_model("digit.model")
+
+        filename = input("enter filename of picture ")
+        while filename != "quit":
+            img = cv.imread(filename)[:, :, 0]
+            img = cv.resize(img, (28, 28))
+            img = np.invert(np.array([img]))
+            prediction = model.predict(img)
+            print(np.argmax(prediction))
+            plt.imshow(img[0], cmap=plt.cm.binary)
+            plt.show()
+            filename = input("enter filename of picture ")
+
+if __name__=="__main__":
+    main(sys.argv[1:])
