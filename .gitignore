@@ -9,3 +9,5 @@ MNIST_data
 */*/media/*.jpeg
 */*/media/*.png
 .env
+groot/data
+*.h5
