@@ -11,3 +11,4 @@ MNIST_data
 .env
 groot/data
 *.h5
+groot/tests
