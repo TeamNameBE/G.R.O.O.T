@@ -58,6 +58,8 @@ def train(argv):
     ])
     """
 
+    train_ds, test_ds = train_ds / 255.0, test_ds / 255.0
+
     model = tf.keras.models.Sequential()
     model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
     model.add(layers.MaxPooling2D((2, 2)))
@@ -68,11 +70,11 @@ def train(argv):
     model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(10))
 
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
 
     history = model.fit(train_ds, train_lb, validation_data=(test_ds, test_lb), epochs=nb_train)
 
-    # loss, accuracy = model.evaluate(train_ds, val_ds)
+    # loss, accuracy = model.evaluate(train_ds, train_lb)
 
     acc = history.history['accuracy']
     val_acc = history.history['val_accuracy']
