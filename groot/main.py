@@ -15,6 +15,13 @@ def main(argv):
     while filename != "quit":
         img = cv.imread(filename)[:, :, 0]
         img = cv.resize(img, (28, 28))
+        h, w = img.shape
+        if h > w:
+            middle = (h - w)//2
+            img = img[middle:w+middle, 0:w]
+        else:
+            middle = (w - h)//2
+            img = img[0:h, middle:h+middle]
         img = np.invert(np.array([img]))
         prediction = model.predict(img)
         print(np.argmax(prediction))
