@@ -24,12 +24,12 @@ def ia_home():
         return render_template("ia.html")
 
     if "file" not in request.files:
-        flash("Aucun fichier n\'a été fourni")
+        flash("Aucun fichier n'a été fourni")
         return redirect(request.url)
 
     file = request.files["file"]
     if file.filename == "":
-        flash("Aucune image n\'a été envoyée")
+        flash("Aucune image n'a été envoyée")
         return redirect(request.url)
 
     if allowed_file(file.filename):
@@ -43,7 +43,7 @@ def ia_home():
         filename_full = "{}{}".format(filename, ext)
 
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_full))
-        database.set(filename, filename_full)
+        database.set(f"job:{filename}", filename_full)
         return redirect(f"/results?job={filename}")
 
     else:
@@ -59,13 +59,15 @@ def results_view():
     return render_template("waiting-screen.html", filename=filename)
 
 
-@app.route('/display/<filename>')
+@app.route("/display/<filename>")
 def display_image(filename):
     database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
     filename_full = database.get(filename)
     if filename_full is None:
-        return redirect(url_for('static', filename='img/404.gif'), code=301)
-    return redirect(url_for('static', filename='media/' + filename_full.decode()), code=301)
+        return redirect(url_for("static", filename="img/404.gif"), code=301)
+    return redirect(
+        url_for("static", filename="media/" + filename_full.decode()), code=301
+    )
 
 
 if __name__ == "__main__":
