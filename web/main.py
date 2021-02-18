@@ -43,7 +43,8 @@ def ia_home():
         filename_full = "{}{}".format(filename, ext)
 
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_full))
-        database.set(f"job:{filename}", filename_full)
+        database.set(f"{filename}_photo", filename_full)
+        database.lpush("job", filename)
         return redirect(f"/results?job={filename}")
 
     else:
