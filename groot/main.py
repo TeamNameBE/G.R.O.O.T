@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import sys
+
 # import redis
 
 
@@ -13,7 +14,7 @@ def main(argv):
     img_height = int(argv[2])
     img_width = int(argv[3])
 
-    class_names = ['daisy', 'dandelion', 'roses', 'sunflowers', 'tulips']
+    class_names = ["daisy", "dandelion", "roses", "sunflowers", "tulips"]
 
     model = keras.models.load_model(model_name)
 
@@ -31,8 +32,9 @@ def main(argv):
     score = tf.nn.softmax(predictions[0])
 
     print(
-        "This image most likely belongs to {} with a {:.2f} percent confidence."
-        .format(class_names[np.argmax(score)], 100 * np.max(score))
+        "This image most likely belongs to {} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(score)], 100 * np.max(score)
+        )
     )
 
     """
