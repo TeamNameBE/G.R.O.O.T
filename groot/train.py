@@ -12,7 +12,7 @@ def train(argv):
     img_width = 128
 
     data_dir = "data/flowers"
-    
+
     train_ds = tf.keras.preprocessing.image_dataset_from_directory(
         data_dir,
         validation_split=0.2,
@@ -30,15 +30,14 @@ def train(argv):
         image_size=(img_height, img_width),
         batch_size=batch_size
     )
-        
+
     num_class = len(train_ds.class_names)
 
     AUTOTUNE = tf.data.AUTOTUNE
 
     train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
     val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
-    
-    
+
     model = tf.keras.models.Sequential([
         layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
         layers.Conv2D(16, 3, padding="same", activation="relu"),
@@ -51,7 +50,7 @@ def train(argv):
         layers.Dense(128, activation="relu"),
         layers.Dense(num_class)
     ])
-    
+
     """
     train_ds, test_ds = train_ds / 255.0, test_ds / 255.0
 
@@ -65,7 +64,10 @@ def train(argv):
     model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(10))
     """
-    model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
+    model.compile(
+        optimizer='adam',
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics=['accuracy'])
 
     history = model.fit(train_ds, validation_data=val_ds, epochs=nb_train)
 
@@ -94,6 +96,7 @@ def train(argv):
     plt.show()
 
     model.save("digit.model")
+
 
 if __name__ == "__main__":
     train(sys.argv[1:])
