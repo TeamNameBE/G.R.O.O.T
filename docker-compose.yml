@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   web:
@@ -43,8 +43,6 @@ services:
       - "traefik.docker.network=traefik-proxy"
     depends_on:
       - web
-    volumes:
-      - media_volume:/home/site/web/static/media
     networks:
       - private
       - public
@@ -54,6 +52,8 @@ services:
     build:
       context: ./groot
     command: python3 main.py
+    volumes:
+      - media_volume:/home/groot/media
     depends_on:
       - redis
       - web
