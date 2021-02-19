@@ -63,7 +63,7 @@ def results_view():
 @app.route("/display/<filename>")
 def display_image(filename):
     database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
-    filename_full = database.get(filename)
+    filename_full = database.get(f"{filename}_photo")
     if filename_full is None:
         return redirect(url_for("static", filename="img/404.gif"), code=301)
     return redirect(
