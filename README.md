@@ -9,4 +9,4 @@ Le projet est separe en deux parties, un site web, et une intelligence artificie
 TODO:
 * [ ] Finir le site web
 * [ ] Faire une IA en fait MDR
-* [ ] Ajouter l'app de l'IA dans le docker-compose
+* [X] Ajouter l'app de l'IA dans le docker-compose
