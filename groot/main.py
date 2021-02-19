@@ -12,8 +12,8 @@ def load_settings():
 
 
 def main():
-    database = redis.Redis(host="localhost", port=6379, db=0)
     settings = load_settings()
+    database = redis.Redis(host=settings["db_host"], port=6379, db=0)
 
     while True:
         # * Waits until a job is pushed to the "job" list
