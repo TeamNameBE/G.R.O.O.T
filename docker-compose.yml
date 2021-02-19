@@ -43,6 +43,8 @@ services:
       - "traefik.docker.network=traefik-proxy"
     depends_on:
       - web
+    volumes:
+      - media_volume:/home/site/web/static/media
     networks:
       - private
       - public
