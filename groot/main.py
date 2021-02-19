@@ -1,41 +1,43 @@
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
-import sys
 
-# import redis
+import redis
+import json
 
 
-def main(argv):
-    # database = redis.Redis(host='localhost', port=6379, db=0)
-    model_name = argv[0]
+def load_settings():
+    f = open("settings.json")
+    return json.load(f)
 
-    img_path = argv[1]
-    img_height = int(argv[2])
-    img_width = int(argv[3])
 
-    class_names = ["daisy", "dandelion", "roses", "sunflowers", "tulips"]
+def main():
+    database = redis.Redis(host="localhost", port=6379, db=0)
+    settings = load_settings()
 
-    model = keras.models.load_model(model_name)
+    while True:
+        # * Waits until a job is pushed to the "job" list
+        _, job_id = database.brpop("job")
 
-    # par url :
-    # sunflower_url = "https://storage.googleapis.com/download.tensorflow.org/example_images/592px-Red_sunflower.jpg"
-    # par path :
+        img_name = database.get(f"{job_id}_photo")
+        img_path = f"/home/web/app/static/media/{img_name}"
 
-    img = keras.preprocessing.image.load_img(
-        img_path, target_size=(img_height, img_width)
-    )
-    img_array = keras.preprocessing.image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)  # Create a batch
+        model = keras.models.load_model(settings["model_name"])
 
-    predictions = model.predict(img_array)
-    score = tf.nn.softmax(predictions[0])
-
-    print(
-        "This image most likely belongs to {} with a {:.2f} percent confidence.".format(
-            class_names[np.argmax(score)], 100 * np.max(score)
+        img = keras.preprocessing.image.load_img(
+            img_path, target_size=(settings["img_height"], settings["img_width"])
         )
-    )
+        img_array = keras.preprocessing.image.img_to_array(img)
+        img_array = tf.expand_dims(img_array, 0)  # Create a batch
+
+        predictions = model.predict(img_array)
+        score = tf.nn.softmax(predictions[0])
+
+        print(
+            "This image most likely belongs to {} with a {:.2f} percent confidence.".format(
+                settings["class_names"][np.argmax(score)], 100 * np.max(score)
+            )
+        )
 
     """
     filename = input("enter filename of picture ")
@@ -61,4 +63,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
