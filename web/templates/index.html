@@ -1,158 +1,339 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>Home - G.R.O.O.T</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fontawesome5-overrides.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/Drag--Drop-Upload-Form.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/giphy.gif') }}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Muli"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Alatsi"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='fonts/fontawesome5-overrides.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/Drag--Drop-Upload-Form.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='img/giphy.gif') }}"
+    />
+  </head>
 
-<body id="page-top" style="border-color: var(--danger);">
+  <body id="page-top" style="border-color: var(--danger)">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-        <div class="container"><a class="navbar-brand js-scroll-trigger" href="/" style="font-size: 35px;font-family: Alatsi, sans-serif;color: var(--warning);">G.R.O.O.T</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#download">Essayez le maintenant</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#features">Fonctionnalite</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                </ul>
-            </div>
+      <div class="container">
+        <a
+          class="navbar-brand js-scroll-trigger"
+          href="/"
+          style="
+            font-size: 35px;
+            font-family: Alatsi, sans-serif;
+            color: var(--warning);
+          "
+          >G.R.O.O.T</a
+        ><button
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          class="navbar-toggler float-right"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#download"
+                >Essayez le maintenant</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#features"
+                >Fonctionnalite</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
-    <header class="masthead" style="background: url('{{ url_for('static', filename='img/bg-plants.svg') }}') repeat, linear-gradient(145deg, #479f02 0%, #a96946 100%);height: 100%;background-size: auto, auto;">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-lg-7 my-auto">
-                    <div class="mx-auto header-content">
-                        <h1 class="mb-5"><br><strong>Grande Reconnaissance d’Orchidées, d’Oseille et de Te-plan aka G.R.O.O.T&nbsp;</strong><br><br></h1><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="/ia">Essayez la maintenant</a>
-                    </div>
-                </div>
-                <div class="col-lg-5 my-auto">
-                    <div class="device-container">
-                        <div class="device-mockup iphone6_plus portrait white">
-                            <div class="device" style="background-image:url('{{ url_for('static', filename='img/iphone_6_plus_white_port.png') }}');">
-                                <div class="screen"><img class="img-fluid" src="{{ url_for('static', filename='img/groot.gif') }}"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iphone-mockup"></div>
-                </div>
+    <header
+      class="masthead"
+      style="background: url('{{ url_for('static', filename='img/bg-plants.svg') }}') repeat, linear-gradient(145deg, #479f02 0%, #a96946 100%);height: 100%;background-size: auto, auto;"
+    >
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-lg-7 my-auto">
+            <div class="mx-auto header-content">
+              <h1 class="mb-5">
+                <br /><strong
+                  >Grande Reconnaissance d’Orchidées, d’Oseille et de Te-plan
+                  aka G.R.O.O.T&nbsp;</strong
+                ><br /><br />
+              </h1>
+              <a
+                class="btn btn-outline-warning btn-xl js-scroll-trigger"
+                role="button"
+                href="/ia"
+                >Essayez la maintenant</a
+              >
             </div>
+          </div>
+          <div class="col-lg-5 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div
+                  class="device"
+                  style="background-image:url('{{ url_for('static', filename='img/iphone_6_plus_white_port.png') }}');"
+                >
+                  <div class="screen">
+                    <img
+                      class="img-fluid"
+                      src="{{ url_for('static', filename='img/groot.gif') }}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="iphone-mockup"></div>
+          </div>
         </div>
+      </div>
     </header>
     <section id="download" class="download text-center bg-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <h2 class="section-heading">Reconnaissez vos plantes sans aucun effort</h2>
-                    <p>Essayez notre outil de reconnaissance de plantes&nbsp;</p>
-                    <div class="badges"><a class="badge-link" href="#"><img src="{{ url_for('static', filename='img/github-logo.png') }}"></a></div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <h2 class="section-heading">
+              Reconnaissez vos plantes sans aucun effort
+            </h2>
+            <p>Essayez notre outil de reconnaissance de plantes&nbsp;</p>
+            <div class="badges">
+              <a class="badge-link" href="#"
+                ><img
+                  src="{{ url_for('static', filename='img/github-logo.png') }}"
+              /></a>
             </div>
+          </div>
         </div>
+      </div>
     </section>
     <section id="features" class="features">
-        <div class="container">
-            <div class="section-heading text-center">
-                <h2>Un outil performant</h2>
-                <p class="text-muted">Entrainé&nbsp;sur plusieurs milliers de photo<br></p>
-                <hr>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 my-auto">
-                    <div class="device-container">
-                        <div class="device-mockup iphone6_plus portrait white">
-                            <div class="device" style="background-image: url('{{ url_for('static', filename='img/iphone_6_plus_white_port.png') }}');">
-                                <div class="screen"><img class="img-fluid" src="{{ url_for('static', filename='img/groot.gif') }}"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 my-auto">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-screen-smartphone text-primary"></i>
-                                    <h3>Multi-plateformes</h3>
-                                    <p class="text-muted">Prenez votre photo directement depuis votre Smartphone<br></p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-cloud-upload text-primary"></i>
-                                    <h3>Facilité d'utilisation</h3>
-                                    <p class="text-muted">Uploadez votre image sur notre magnifique fantasmagorique site</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-present text-primary"></i>
-                                    <h3>Usage Gratuit</h3>
-                                    <p class="text-muted">Outil disponible 100% gratuitement et cela&nbsp;à vie*</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-lock-open text-primary"></i>
-                                    <h3>Open Source</h3>
-                                    <p class="text-muted">Le projet est entièrement open source et disponible sur github</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-muted" style="font-size: 11px;margin-left: 80%;">*durant la durée du printemps des sciences</p>
-            </div>
+      <div class="container">
+        <div class="section-heading text-center">
+          <h2>Un outil performant</h2>
+          <p class="text-muted">
+            Entrainé&nbsp;sur plusieurs milliers de photo<br />
+          </p>
+          <hr />
         </div>
+        <div class="row">
+          <div class="col-lg-4 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div
+                  class="device"
+                  style="background-image: url('{{ url_for('static', filename='img/iphone_6_plus_white_port.png') }}');"
+                >
+                  <div class="screen">
+                    <img
+                      class="img-fluid"
+                      src="{{ url_for('static', filename='img/groot.gif') }}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 my-auto">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="feature-item">
+                    <i class="icon-screen-smartphone text-primary"></i>
+                    <h3>Multi-plateformes</h3>
+                    <p class="text-muted">
+                      Prenez votre photo directement depuis votre Smartphone<br />
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="feature-item">
+                    <i class="icon-cloud-upload text-primary"></i>
+                    <h3>Facilité d'utilisation</h3>
+                    <p class="text-muted">
+                      Uploadez votre image sur notre magnifique fantasmagorique
+                      site
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="feature-item">
+                    <i class="icon-present text-primary"></i>
+                    <h3>Usage Gratuit</h3>
+                    <p class="text-muted">
+                      Outil disponible 100% gratuitement et cela&nbsp;à vie*
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="feature-item">
+                    <i class="icon-lock-open text-primary"></i>
+                    <h3>Open Source</h3>
+                    <p class="text-muted">
+                      Le projet est entièrement open source et disponible sur
+                      github
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-muted" style="font-size: 11px; margin-left: 80%">
+            *durant la durée du printemps des sciences
+          </p>
+        </div>
+      </div>
     </section>
-    <section class="cta" style="background-image:url('{{ url_for('static', filename='img/bg-cta.jpg') }}');">
-        <div class="cta-content">
-            <div class="container">
-                <h2>N'attendez essayer la maintenant</h2><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="#contact">Commencez l'experience!</a>
-            </div>
+    <section
+      class="cta"
+      style="background-image:url('{{ url_for('static', filename='img/bg-cta.jpg') }}');"
+    >
+      <div class="cta-content">
+        <div class="container">
+          <h2>N'attendez essayer la maintenant</h2>
+          <a
+            class="btn btn-outline-warning btn-xl js-scroll-trigger"
+            role="button"
+            href="#contact"
+            >Commencez l'experience!</a
+          >
         </div>
-        <div class="overlay"></div>
+      </div>
+      <div class="overlay"></div>
     </section>
     <section id="contact" class="contact bg-primary">
-        <div class="container">
-            <h2><span>We&nbsp;</span><i class="fa fa-heart"></i><span>&nbsp;new plants!</span></h2>
-            <ul class="list-inline list-social">
-                <li class="list-inline-item social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li class="list-inline-item social-twitter"><a href="#" style="background: rgb(54,54,54);"><i class="fa fa-github"></i></a></li>
-                <li class="list-inline-item social-twitter"><a href="#" style="background: rgb(114,137,217);"><i class="fab fa-discord"></i></a></li>
-            </ul>
-            <h2 style="margin-top: 5%;"><span>Made by</span></h2>
-            <ul class="list-inline list-social">
-                <li class="list-inline-item"><img class="rounded-circle" src="http://www.gravatar.com/avatar/7386f631d26a9fde6ec1571f899f2465?s=100"></li>
-                <li class="list-inline-item"><img class="rounded-circle" src="https://www.gravatar.com/avatar/18a27f3ba520c4fdb0a1f4b0bac4f846?s=100"></li>
-                <li class="list-inline-item"><img class="rounded-circle" src="https://www.gravatar.com/avatar/1278f2f1cae90c8ddfe95b3360578c06?s=100"></li>
-                <li class="list-inline-item"><img class="rounded-circle" src="https://www.gravatar.com/avatar/dc82089df9c1fa49ba5814971b82cd7c?s=100"></li>
-                <li class="list-inline-item"><img class="rounded-circle" src="https://www.gravatar.com/avatar/3aa8e6baab25f22c74a3720e3f828655?s=100"></li>
-            </ul>
-        </div>
+      <div class="container">
+        <h2>
+          <span>We&nbsp;</span><i class="fa fa-heart"></i
+          ><span>&nbsp;new plants!</span>
+        </h2>
+        <ul class="list-inline list-social">
+          <li class="list-inline-item social-twitter">
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li class="list-inline-item social-twitter">
+            <a href="#" style="background: rgb(54, 54, 54)"
+              ><i class="fa fa-github"></i
+            ></a>
+          </li>
+          <li class="list-inline-item social-twitter">
+            <a href="#" style="background: rgb(114, 137, 217)"
+              ><i class="fab fa-discord"></i
+            ></a>
+          </li>
+        </ul>
+        <h2 style="margin-top: 5%"><span>Made by</span></h2>
+        <ul class="list-inline list-social">
+          <li class="list-inline-item">
+            <a
+              href="https://github.com/Minigrim0"
+              style="
+                background-image: url(https://www.gravatar.com/avatar/7386f631d26a9fde6ec1571f899f2465?s=100);
+                width: 100px;
+                height: 100px;
+              "
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a
+              href="https://github.com/Mortinat"
+              style="
+                background-image: url(https://www.gravatar.com/avatar/18a27f3ba520c4fdb0a1f4b0bac4f846?s=100);
+                width: 100px;
+                height: 100px;
+              "
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a
+              href="https://github.com/mzavagli"
+              style="
+                background-image: url(https://www.gravatar.com/avatar/1278f2f1cae90c8ddfe95b3360578c06?s=100);
+                width: 100px;
+                height: 100px;
+              "
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <a
+              href="https://github.com/yishyu"
+              style="
+                background-image: url(https://www.gravatar.com/avatar/dc82089df9c1fa49ba5814971b82cd7c?s=100);
+                width: 100px;
+                height: 100px;
+              "
+            ></a>
+          </li>
+          <li class="list-inline-item">
+            <img
+              class="rounded-circle"
+              src="https://www.gravatar.com/avatar/3aa8e6baab25f22c74a3720e3f828655?s=100"
+            />
+          </li>
+        </ul>
+      </div>
     </section>
     <footer>
-        <div class="container">
-            <p>©&nbsp;G.R.O.O.T 2021. All Rights Reserved.</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">FAQ</a></li>
-            </ul>
-        </div>
+      <div class="container">
+        <p>©&nbsp;G.R.O.O.T 2021. All Rights Reserved.</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">FAQ</a></li>
+        </ul>
+      </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="{{ url_for('static', filename='js/new-age.js') }}"></script>
-</body>
-
+  </body>
 </html>

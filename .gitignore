@@ -4,10 +4,9 @@ ve*
 __pycache__
 digit.model
 MNIST_data
-*.png
-*/*/media/*.jpg
-*/*/media/*.jpeg
-*/*/media/*.png
+web/static/media/*.jpg
+web/static/media/*.jpeg
+web/static/media/*.png
 groot/data
 *.h5
 groot/tests
