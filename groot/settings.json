@@ -9,5 +9,6 @@
         "tulips"
     ],
     "model_name": "groot",
-    "db_host": "redis"
+    "db_host": "redis",
+    "media_dir": "/home/groot/media"
 }

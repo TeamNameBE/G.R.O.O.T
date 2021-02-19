@@ -20,7 +20,7 @@ def main():
         _, job_id = database.brpop("job")
 
         img_name = database.get(f"{job_id}_photo")
-        img_path = f"/home/web/app/static/media/{img_name}"
+        img_path = f"{settings['media_dir']}/{img_name}"
 
         model = keras.models.load_model(settings["model_name"])
 
