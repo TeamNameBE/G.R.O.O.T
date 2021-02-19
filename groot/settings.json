@@ -8,7 +8,7 @@
         "sunflowers",
         "tulips"
     ],
-    "model_name": "groot",
+    "model_name": "Groot",
     "db_host": "redis",
     "media_dir": "/home/groot/media"
 }
