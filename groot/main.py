@@ -19,6 +19,7 @@ def main():
     while True:
         # * Waits until a job is pushed to the "job" list
         _, job_id = database.brpop("job")
+        job_id = job_id.decode()
         print(f"{job_id}: Job Created")
         time.sleep(2)  # ! Make sure the entry has been commited
 
