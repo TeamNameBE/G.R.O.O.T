@@ -33,10 +33,11 @@ def main():
         predictions = model.predict(img_array)
         score = tf.nn.softmax(predictions[0])
 
-        print(
+        database.set(
+            f"{job_id}_result",
             "This image most likely belongs to {} with a {:.2f} percent confidence.".format(
                 settings["class_names"][np.argmax(score)], 100 * np.max(score)
-            )
+            ),
         )
 
     """
