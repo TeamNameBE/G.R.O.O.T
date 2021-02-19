@@ -19,11 +19,12 @@ def main():
     while True:
         # * Waits until a job is pushed to the "job" list
         _, job_id = database.brpop("job")
-        os.sleep(2)  # ! Make sure the entry has been set
+        print(f"{job_id}: Job Created")
+        os.sleep(2)  # ! Make sure the entry has been commited
 
         img_name = database.get(f"{job_id}_photo")
         img_path = f"{settings['media_dir']}/{img_name}"
-
+        print(f"{job_id}: associated image is {img_name} at {img_path}")
         model = keras.models.load_model(settings["model_name"])
 
         img = keras.preprocessing.image.load_img(
@@ -34,6 +35,10 @@ def main():
 
         predictions = model.predict(img_array)
         score = tf.nn.softmax(predictions[0])
+
+        print(
+            f"{job_id}: result is '{settings['class_names'][np.argmax(score)]}' with confidence {100 * np.max(score)}"
+        )
 
         database.set(
             f"{job_id}_result",
