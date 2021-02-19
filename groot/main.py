@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
+import os
 
 import redis
 import json
@@ -18,9 +19,9 @@ def main():
     while True:
         # * Waits until a job is pushed to the "job" list
         _, job_id = database.brpop("job")
+        os.sleep(2)  # ! Make sure the entry has been set
 
         img_name = database.get(f"{job_id}_photo")
-        print(img_name)
         img_path = f"{settings['media_dir']}/{img_name}"
 
         model = keras.models.load_model(settings["model_name"])
