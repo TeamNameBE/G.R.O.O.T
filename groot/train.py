@@ -91,7 +91,7 @@ def train(argv):
     plt.title("Training and Validation Loss")
     plt.show()
 
-    model.save("digit.model")
+    model.save("Groot")
 
 
 if __name__ == "__main__":
