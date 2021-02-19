@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
-import os
+import time
 
 import redis
 import json
@@ -20,7 +20,7 @@ def main():
         # * Waits until a job is pushed to the "job" list
         _, job_id = database.brpop("job")
         print(f"{job_id}: Job Created")
-        os.sleep(2)  # ! Make sure the entry has been commited
+        time.sleep(2)  # ! Make sure the entry has been commited
 
         img_name = database.get(f"{job_id}_photo")
         img_path = f"{settings['media_dir']}/{img_name}"
