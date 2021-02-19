@@ -40,34 +40,25 @@ def train(argv):
 
     model = tf.keras.models.Sequential(
         [
-            layers.experimental.preprocessing.Rescaling(
-                1.0 / 255, input_shape=(img_height, img_width, 3)
+            layers.experimental.preprocessing.RandomFlip(
+                "horizontal", input_shape=(img_height, img_width, 3)
             ),
+            layers.experimental.preprocessing.RandomRotation(0.1),
+            layers.experimental.preprocessing.RandomZoom(0.1),
+            layers.experimental.preprocessing.Rescaling(1.0 / 255),
             layers.Conv2D(16, 3, padding="same", activation="relu"),
             layers.MaxPooling2D(),
             layers.Conv2D(32, 3, padding="same", activation="relu"),
             layers.MaxPooling2D(),
             layers.Conv2D(64, 3, padding="same", activation="relu"),
             layers.MaxPooling2D(),
+            layers.Dropout(0.2),
             layers.Flatten(),
             layers.Dense(128, activation="relu"),
             layers.Dense(num_class),
         ]
     )
 
-    """
-    train_ds, test_ds = train_ds / 255.0, test_ds / 255.0
-
-    model = tf.keras.models.Sequential()
-    model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-    model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-    model.add(layers.Flatten())
-    model.add(layers.Dense(64, activation='relu'))
-    model.add(layers.Dense(10))
-    """
     model.compile(
         optimizer="adam",
         loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
