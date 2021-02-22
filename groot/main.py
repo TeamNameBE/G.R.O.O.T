@@ -21,9 +21,8 @@ def main():
         _, job_id = database.brpop("job")
         job_id = job_id.decode()
         print(f"{job_id}: Job Created")
-        time.sleep(2)  # ! Make sure the entry has been commited
 
-        img_name = database.get(f"{job_id}_photo")
+        img_name = database.get(f"{job_id}_photo").decode()
         img_path = f"{settings['media_dir']}/{img_name}"
         print(f"{job_id}: associated image is {img_name} at {img_path}")
         model = keras.models.load_model(settings["model_name"])
