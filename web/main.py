@@ -68,7 +68,7 @@ def results_view():
             {
                 "result_family": database.get(f"{filename}_result_family").decode(),
                 "result_confidence": database.get(f"{filename}_result_perc").decode(),
-                "result_tweeted": database.get(f"{filename}_tweet").decode(),
+                "result_tweeted": database.get(f"{filename}_tweet") is not None,
             }
         )
     else:
