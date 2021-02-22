@@ -141,7 +141,7 @@ def tweet_result():
     confidence = database.get(f"{job_id}_result_perc").decode()
 
     database.set(f"{job_id}_tweet", "true")
-    text = f"Cette plante appartient à la famille {family} (confiance : {confidence}) \n #Groot https://groot.ninja"
+    text = f"Cette plante appartient à la famille {family} (confiance : {confidence}%) \n #Groot https://groot.ninja"
 
     photo = open(os.path.join(app.config["UPLOAD_FOLDER"], filename), "rb")
     api = Twython(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
