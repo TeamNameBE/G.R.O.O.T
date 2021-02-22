@@ -18,6 +18,8 @@ RUN pip install flake8
 COPY . .
 RUN flake8 --ignore=E501,F401 .
 
+RUN apk update && apk add build-base
+
 # install dependencies
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
