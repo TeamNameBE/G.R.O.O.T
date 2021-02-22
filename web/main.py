@@ -1,5 +1,6 @@
 import os
 import secrets
+import Twython
 
 import redis
 from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
@@ -99,6 +100,32 @@ def api_result():
     position = get_job_position(job_id, nb_jobs, database)
 
     return jsonify({"status": "running", "position": position, "running_jobs": nb_jobs})
+
+
+@app.route("/tweet", methods=["GET"])
+def tweet_result():
+    job_id = request.args.get("job", None)
+    if job_id is None:
+        return
+
+    CONSUMER_KEY = os.environ.get("CONSUMER_KEY", "SUPERSECRET")
+    CONSUMER_SECRET = os.environ.get("CONSUMER_SECRET", "YOULLNEVERFIND")
+    ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN", "WELLATLEASTYOUTRIED")
+    ACCESS_SECRET = os.environ.get("ACCESS_SECRET", "NOPENOTTHISONE")
+
+    database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
+    filename = database.get(f"{job_id}_photo")
+    family = database.get(f"{job_id}_result_family").decode()
+    confidence = database.get(f"{job_id}_result_perc").decode()
+    text = f"Cette plante appartient à la famille {family} (confiance : {confidence}) \n #Groot https://groot.ninja"
+
+    photo = open(os.path.join(app.config["UPLOAD_FOLDER"], filename), "rb")
+
+    api = Twython(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
+
+    response = api.upload_media(media=photo)
+    response = api.update_status(status=text, media_ids=[response["media_id"]])
+    return redirect(response["entities"]["urls"]["url"])
 
 
 if __name__ == "__main__":
