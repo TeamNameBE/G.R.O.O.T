@@ -60,16 +60,26 @@ def results_view():
         return redirect("/")
 
     database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
+    job_done = database.get(f"{filename}_result") is not None
+    context = {"job_done": job_done, "job_id": filename}
 
-    nb_jobs = database.llen("job")
-    job_position = get_job_position(filename, nb_jobs, database) + 1
-    return render_template(
-        "waiting-screen.html",
-        filename=filename,
-        position=job_position,
-        nb_jobs=nb_jobs,
-        job_id=filename,
-    )
+    if job_done:
+        context.update(
+            {
+                "result_family": database.get(f"{filename}_result_family").decode(),
+                "result_confidence": database.get(f"{filename}_result_perc").decode(),
+            }
+        )
+    else:
+        nb_jobs = database.llen("job")
+        context.update(
+            {
+                "nb_jobs": nb_jobs,
+                "job_position": nb_jobs - get_job_position(filename, nb_jobs, database),
+            }
+        )
+
+    return render_template("waiting-screen.html", filename=filename, context=context)
 
 
 @app.route("/display/<filename>")
