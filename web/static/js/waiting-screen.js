@@ -8,7 +8,12 @@ function get_results(){
                 $("#position").text = data["position"];
                 $("#total_jobs").text = data["running_jobs"];
             } else if(data['status'] == "done") {
-                $("#result_div").html("<h3>" + data["result"] + "</h3>");
+                $("#result_div").html(
+                    "<h3>Cette image appartient probablement a la famille des "
+                    + data["result"]["family"]
+                    + " (Confiance: " + data["result"]["confidence"]
+                    + ")</h3>"
+                );
                 $("#title").text("Votre résultat est disponible !");
                 $("#queue_position").css("display", "none");
                 clearInterval(interval);

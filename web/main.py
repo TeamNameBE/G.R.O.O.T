@@ -93,7 +93,13 @@ def api_result():
     job_done = database.get(f"{job_id}_result") is not None
     if job_done:
         return jsonify(
-            {"status": "done", "result": database.get(f"{job_id}_result").decode()}
+            {
+                "status": "done",
+                "result": {
+                    "family": database.get(f"{job_id}_result_family").decode(),
+                    "confidence": database.get(f"{job_id}_result_perc").decode(),
+                },
+            }
         )
 
     nb_jobs = database.llen("job")
