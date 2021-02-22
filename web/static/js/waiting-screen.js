@@ -16,6 +16,7 @@ function get_results(){
                 );
                 $("#title").text("Votre résultat est disponible !");
                 $("#queue_position").css("display", "none");
+                $("#tweet_btn").html("<a class='btn btn-primary' href='/tweet?job=" + job_id + "'>Tweeter le résultat</a>")
                 clearInterval(interval);
             } else if(data["status"] == "error"){
                 $("#title").text("Une erreur est survenue !");

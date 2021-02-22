@@ -41,6 +41,11 @@
                     <div id="result_div">
                         {% if context.job_done %}
                             <h3>Cette image appartient probablement a la famille des {{ context.result_family }} (Confiance: {{ context.result_confidence }})</h3>
+                            <div id="tweet_btn">
+                                {% if not context.result_tweeted %}
+                                    <a class="btn btn-primary" href="/tweet?job={{ context.job_id }}">Tweeter le résultat</a>
+                                {% endif %}
+                            </div>
                         {% else %}
                             <img src="{{ url_for('static', filename="img/giphy.gif") }}" style="width: 350px;" /><br/>
                         {% endif %}
