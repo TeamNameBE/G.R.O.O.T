@@ -41,11 +41,10 @@ def main():
         )
 
         database.set(
-            f"{job_id}_result",
-            "This image most likely belongs to {} with a {:.2f} percent confidence.".format(
-                settings["class_names"][np.argmax(score)], 100 * np.max(score)
-            ),
+            f"{job_id}_result_family", settings["class_names"][np.argmax(score)]
         )
+        database.set(f"{job_id}_result_perc", 100 * np.max(score))
+        database.set(f"{job_id}_result", True)
 
     """
     filename = input("enter filename of picture ")
