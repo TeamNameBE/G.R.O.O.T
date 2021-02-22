@@ -14,10 +14,6 @@ function get_results(){
                     + " (Confiance: " + data["result"]["confidence"]
                     + ")</h3>"
                 );
-                console.log("<h3>Cette image appartient probablement a la famille des "
-                + data["result"]["family"]
-                + " (Confiance: " + data["result"]["confidence"]
-                + ")</h3>");
                 $("#title").text("Votre résultat est disponible !");
                 $("#queue_position").css("display", "none");
                 clearInterval(interval);
