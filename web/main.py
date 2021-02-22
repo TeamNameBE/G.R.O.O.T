@@ -122,17 +122,24 @@ def api_result():
 def tweet_result():
     job_id = request.args.get("job", None)
     if job_id is None:
-        return
+        flash("Vous ne pouvez pas acceder à cette page sans job_id")
+        return redirect("/")
+
+    database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
+    if database.get(f"{job_id}_tweet") is not None:
+        flash("Ce résultat à déjà été tweeté !")
+        return redirect("/")
 
     CONSUMER_KEY = os.environ.get("CONSUMER_KEY", "SUPERSECRET")
     CONSUMER_SECRET = os.environ.get("CONSUMER_SECRET", "YOULLNEVERFIND")
     ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN", "WELLATLEASTYOUTRIED")
     ACCESS_SECRET = os.environ.get("ACCESS_SECRET", "NOPENOTTHISONE")
 
-    database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
     filename = database.get(f"{job_id}_photo").decode()
     family = database.get(f"{job_id}_result_family").decode()
     confidence = database.get(f"{job_id}_result_perc").decode()
+
+    database.set(f"{job_id}_tweet", "true")
     text = f"Cette plante appartient à la famille {family} (confiance : {confidence}) \n #Groot https://groot.ninja"
 
     photo = open(os.path.join(app.config["UPLOAD_FOLDER"], filename), "rb")
