@@ -136,12 +136,11 @@ def tweet_result():
     text = f"Cette plante appartient à la famille {family} (confiance : {confidence}) \n #Groot https://groot.ninja"
 
     photo = open(os.path.join(app.config["UPLOAD_FOLDER"], filename), "rb")
-
     api = Twython(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
     response = api.upload_media(media=photo)
     response = api.update_status(status=text, media_ids=[response["media_id"]])
-    return redirect(response["entities"]["urls"]["url"])
+    return redirect(response["entities"]["urls"][0]["url"])
 
 
 if __name__ == "__main__":
