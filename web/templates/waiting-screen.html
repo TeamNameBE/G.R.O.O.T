@@ -34,9 +34,13 @@
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col d-flex justify-content-center align-self-center flex-wrap">
-                    <h1 class="text-center" style="font-size: 80px;width: 100%;">Veuillez patienter</h1>
-                    <p class="text-center" style="font-size: 25px;width: 100%;">Vous etes 35/40 dans la file</p>
-                    <img src="{{ url_for('static', filename="img/giphy.gif") }}" style="width: 350px;" /><br/>
+                    <h1 class="text-center" style="font-size: 80px;width: 100%;" id="title">Veuillez patienter</h1>
+                    <p id="queue_position" class="text-center" style="font-size: 25px;width: 100%;">
+                        Vous etes <span id="position">{{position}}</span>/<span id="total_jobs">{{nb_jobs}}</span> dans la file
+                    </p>
+                    <div id="result_div">
+                        <img src="{{ url_for('static', filename="img/giphy.gif") }}" style="width: 350px;" /><br/>
+                    </div>
                     <p class="text-center" style="font-size: 25px;width: 100%">Votre image</p><br/>
                     <img style="max-width: 350px" src="{{ url_for('display_image', filename=filename) }}" alt="votre image"/>
                 </div>
@@ -47,6 +51,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="{{ url_for('static', filename="js/new-age.js") }}"></script>
+    <script>
+        const job_id = "{{ job_id }}";
+    </script>
+    <script src="{{ url_for('static', filename="js/waiting-screen.js") }}"></script>
 </body>
 
 </html>
