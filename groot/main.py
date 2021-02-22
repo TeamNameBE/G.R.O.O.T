@@ -43,7 +43,7 @@ def main():
         database.set(
             f"{job_id}_result_family", settings["class_names"][np.argmax(score)]
         )
-        database.set(f"{job_id}_result_perc", 100 * np.max(score))
+        database.set(f"{job_id}_result_perc", round(100 * np.max(score), 2))
         database.set(f"{job_id}_result", "True")
 
     """
