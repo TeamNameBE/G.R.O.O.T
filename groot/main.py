@@ -44,7 +44,7 @@ def main():
             f"{job_id}_result_family", settings["class_names"][np.argmax(score)]
         )
         database.set(f"{job_id}_result_perc", 100 * np.max(score))
-        database.set(f"{job_id}_result", True)
+        database.set(f"{job_id}_result", "True")
 
     """
     filename = input("enter filename of picture ")
