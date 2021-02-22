@@ -2,10 +2,10 @@ import os
 import secrets
 
 import redis
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
 
 from settings import UPLOAD_FOLDER, REDIS_HOST
-from utils import allowed_file, get_extension
+from utils import allowed_file, get_extension, get_job_position
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "vairysekrette")
@@ -57,7 +57,18 @@ def results_view():
     filename = request.args.get("job", None)
     if filename is None or filename == "":
         return redirect("/")
-    return render_template("waiting-screen.html", filename=filename)
+
+    database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
+
+    nb_jobs = database.llen("job")
+    job_position = get_job_position(filename, nb_jobs, database) + 1
+    return render_template(
+        "waiting-screen.html",
+        filename=filename,
+        position=job_position,
+        nb_jobs=nb_jobs,
+        job_id=filename,
+    )
 
 
 @app.route("/display/<filename>")
@@ -69,6 +80,25 @@ def display_image(filename):
     return redirect(
         url_for("static", filename="media/" + filename_full.decode()), code=301
     )
+
+
+@app.route("/api/result", methods=["GET"])
+def api_result():
+    database = redis.Redis(host=REDIS_HOST, port=6379, db=0)
+    job_id = request.args.get("job", None)
+    if job_id is None:
+        return jsonify({"status": "error", "error": "no job specified"})
+
+    job_done = database.get(f"{job_id}_result") is not None
+    if job_done:
+        return jsonify(
+            {"status": "done", "result": database.get(f"{job_id}_result").decode()}
+        )
+
+    nb_jobs = database.llen("job")
+    position = get_job_position(job_id, nb_jobs, database)
+
+    return jsonify({"status": "running", "position": position, "running_jobs": nb_jobs})
 
 
 if __name__ == "__main__":

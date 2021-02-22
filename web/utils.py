@@ -12,3 +12,10 @@ def allowed_file(filename):
 
 def get_extension(filename):
     return os.path.splitext(filename)[1]
+
+
+def get_job_position(job, nb_job, conn):
+    for x in range(nb_job):
+        if conn.lindex("job", x).decode() == job:
+            return x
+    return -1
