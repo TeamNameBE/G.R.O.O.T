@@ -1,6 +1,6 @@
 import os
 import secrets
-import Twython
+from twython import Twython
 
 import redis
 from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
