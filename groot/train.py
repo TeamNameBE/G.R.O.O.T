@@ -11,21 +11,18 @@ def train(argv):
     img_height = 128
     img_width = 128
 
-    data_dir = "data/flowers"
+    train_directory = "data/flowers/train"
+    val_directory = "data/flowers/val"
 
     train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        data_dir,
-        validation_split=0.2,
-        subset="training",
+        train_directory,
         seed=123,
         image_size=(img_height, img_width),
         batch_size=batch_size,
     )
 
     val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        data_dir,
-        validation_split=0.2,
-        subset="validation",
+        val_directory,
         seed=123,
         image_size=(img_height, img_width),
         batch_size=batch_size,
