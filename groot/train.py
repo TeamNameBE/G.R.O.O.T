@@ -2,14 +2,21 @@ import tensorflow as tf
 from tensorflow.keras import layers
 import sys
 import matplotlib.pyplot as plt
+import json
+
+
+def load_settings():
+    f = open("settings.json")
+    return json.load(f)
 
 
 def train(argv):
 
+    settings = load_settings()
     nb_train = int(argv[0])
     batch_size = 32
-    img_height = 128
-    img_width = 128
+    img_height = settings["img_height"]
+    img_width = settings["img_width"]
 
     train_directory = "data/flowers/train"
     val_directory = "data/flowers/val"
@@ -88,7 +95,7 @@ def train(argv):
     plt.title("Training and Validation Loss")
     plt.show()
 
-    model.save("Groot")
+    model.save(settings["model_name"])
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 {
-    "img_height": 128,
-    "img_width": 128,
+    "img_height": 512,
+    "img_width": 512,
     "class_names": [
         "alpine sea holly",
         "anthurium",
@@ -82,12 +82,7 @@
         "red ginger",
         "rose",
         "ruby-lipped cattleya",
-        "siam tulip",
-        "silverbush",
-        "snapdragon",
-        "spear thistle",
-        "spring crocus",
-        "stemless gentian",
+        "data.txt",
         "sunflower",
         "sweet pea",
         "sweet william",
