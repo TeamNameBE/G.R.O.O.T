@@ -37,7 +37,7 @@ def train(argv):
 
     num_class = len(train_ds.class_names)
 
-    AUTOTUNE = tf.data.AUTOTUNE
+    AUTOTUNE = tf.data.experimental.AUTOTUNE
 
     train_ds = train_ds.cache(filename=".train_cache").shuffle(1000).prefetch(buffer_size=AUTOTUNE)
     val_ds = val_ds.cache(filename=".train_cache").prefetch(buffer_size=AUTOTUNE)
