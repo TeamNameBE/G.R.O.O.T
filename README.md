@@ -10,6 +10,3 @@ TODO:
 * [ ] Finir le site web
 * [ ] Faire une IA en fait MDR
 * [X] Ajouter l'app de l'IA dans le docker-compose
-
-Dataset :
-[href](https://www.kaggle.com/msheriey/104-flowers-garden-of-eden?select=jpeg-311x311)
