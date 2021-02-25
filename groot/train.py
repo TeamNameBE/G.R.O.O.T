@@ -21,6 +21,14 @@ def train(argv):
     train_directory = "data/flowers/train"
     val_directory = "data/flowers/val"
 
+    physical_devices = tf.config.list_physical_devices("GPU")
+    try:
+        tf.config.experimental.set_memory_growth(physical_devices[0], True)
+    except Exception as e:
+        print(f"\n\n COULD NOT SET MEMORY GROWTH TRUE : {e} \n\n")
+        # Invalid device or cannot modify virtual devices once initialized.
+        pass
+
     train_ds = tf.keras.preprocessing.image_dataset_from_directory(
         train_directory,
         seed=123,
@@ -39,7 +47,11 @@ def train(argv):
 
     AUTOTUNE = tf.data.experimental.AUTOTUNE
 
-    train_ds = train_ds.cache(filename=".train_cache").shuffle(1000).prefetch(buffer_size=AUTOTUNE)
+    train_ds = (
+        train_ds.cache(filename=".train_cache")
+        .shuffle(1000)
+        .prefetch(buffer_size=AUTOTUNE)
+    )
     val_ds = val_ds.cache(filename=".train_cache").prefetch(buffer_size=AUTOTUNE)
 
     model = tf.keras.models.Sequential(
