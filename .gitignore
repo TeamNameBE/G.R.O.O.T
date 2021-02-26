@@ -11,3 +11,4 @@ groot/data
 *.h5
 groot/tests
 .train_cache.*
+GrootModel/

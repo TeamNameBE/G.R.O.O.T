@@ -102,7 +102,7 @@
         "windflower",
         "yellow iris"
     ],
-    "model_name": "Groot",
+    "model_name": "GrootModel",
     "db_host": "redis",
     "media_dir": "/home/groot/media"
 }
