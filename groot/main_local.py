@@ -2,8 +2,12 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import sys
+import json
 
-# import redis
+
+def load_settings():
+    f = open("settings.json")
+    return json.load(f)
 
 
 def main(argv):
@@ -14,7 +18,16 @@ def main(argv):
     img_height = int(argv[2])
     img_width = int(argv[3])
 
-    class_names = ["daisy", "dandelion", "roses", "sunflowers", "tulips"]
+    settings = load_settings()
+    class_names = settings["class_names"]
+
+    physical_devices = tf.config.list_physical_devices("GPU")
+    try:
+        tf.config.experimental.set_memory_growth(physical_devices[0], True)
+    except Exception as e:
+        print(f"\n\n COULD NOT SET MEMORY GROWTH TRUE : {e} \n\n")
+        # Invalid device or cannot modify virtual devices once initialized.
+        pass
 
     model = keras.models.load_model(model_name)
 
