@@ -12,7 +12,7 @@ function get_results(){
                     "<h3>Cette image appartient probablement a la famille des "
                     + data["result"]["family"]
                     + " (Confiance: " + data["result"]["confidence"]
-                    + ")</h3>"
+                    + ")</h3><div id='tweet_btn'></div>"
                 );
                 $("#title").text("Votre résultat est disponible !");
                 $("#queue_position").css("display", "none");
